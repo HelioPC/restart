@@ -12,6 +12,7 @@ struct HomeView: View {
     
     // If the key exists on app storage, the initialization will be skipped
     @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
+    @State private var isAnimating: Bool = false
 
     // MARK: - BODY
     
@@ -27,12 +28,18 @@ struct HomeView: View {
                 Image("character-2")
                     .resizable()
                     .scaledToFit()
-                .padding()
+                    .padding()
+                    .offset(y: isAnimating ? 35 : -35)
+                    .animation(
+                        Animation.easeInOut(duration: 2)
+                            .repeatForever()
+                        , value: isAnimating
+                    )
             }
             
             // MARK: - CENTER
             
-            Text("The time that leadsto mastery is dependent on the intensity of our focus")
+            Text("The time that leads to mastery is dependent on the intensity of our focus")
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundStyle(.secondary)
@@ -44,7 +51,9 @@ struct HomeView: View {
             Spacer()
             
             Button {
-                isOnboardingViewActive = true
+                withAnimation {
+                    isOnboardingViewActive = true
+                }
             } label: {
                 Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
                     .imageScale(.large)
@@ -56,6 +65,11 @@ struct HomeView: View {
             .buttonBorderShape(.capsule)
             .controlSize(.large)
         }
+        .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                isAnimating = true
+            })
+        })
     }
 }
 
