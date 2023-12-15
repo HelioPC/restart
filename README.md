@@ -112,9 +112,11 @@ Open the project with Xcode
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-<video height="440" autoplay muted>
-    <source src="./videos/record.mp4" type="video/mp4" >
-</video>
+
+
+https://github.com/HelioPC/restart/assets/59577079/ac130e81-024b-47f5-845d-876df7c51beb
+
+
 
 _For more examples, please refer to the [Documentation](#acknowledgments)_
 
